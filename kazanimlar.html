@@ -184,6 +184,30 @@
     .border-underline:hover {
       border-bottom-color: #4E856F;
     }
+
+    #video-card {
+      position: relative;
+    }
+
+    /* Sade, içeriye oturan × buton */
+    #video-card .close-btn {
+      position: absolute;
+      top: 0.25rem;
+      /* iç padding’e göre biraz içe çekildi */
+      right: 0.75rem;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      /* biraz daha küçük */
+      line-height: 1;
+      color: #555;
+      cursor: pointer;
+      transition: color .2s;
+    }
+
+    #video-card .close-btn:hover {
+      color: #000;
+    }
   </style>
 </head>
 
@@ -293,6 +317,19 @@
         </ul>
       </div>
     </div>
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div id="video-card"
+        class="bg-white rounded-2xl p-6 shadow-2xl w-11/12 max-w-4xl relative transform scale-95 opacity-0 transition-all duration-200 ease-out overflow-visible">
+        <button class="close-btn" onclick="closeVideo()" aria-label="Kapat">&times;</button>
+        <div class="relative w-full" style="padding-top: 56.25%;">
+          <iframe id="video-iframe" class="absolute top-0 left-0 w-full h-full rounded-lg" src="" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
 
     <script>
       const kavramaTests = {
@@ -371,10 +408,9 @@
           <p>M.7.3.2.1</p>
           <h3>Düzgün çokgenlerin kenar ve açı özelliklerini açıklar.</h3>
           <div class="links">
-            <a href="https://youtu.be/TdTLMOh-bzc?si=hXO9jFpVz5LXA989" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('TdTLMOh-bzc')">
               📺 Video
-            </a><br>
+            </button><br>
             <a href="pdfs/videopdf1.pdf" target="_blank" class="text-accent border-underline">
               📄 Video PDF
             </a><br>
@@ -391,10 +427,9 @@
           <p>M.7.3.2.2</p>
           <h3>Çokgenlerin köşegenlerini, iç ve dış açılarını belirler; iç ve dış açıların toplam ölçüsünü hesaplar.</h3>
           <div class="links">
-            <a href="https://youtu.be/77JEUiqguA4?si=_sCer3zCSDILHRj9" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('77JEUiqguA4')">
               📺 Video
-            </a><br>
+            </button><br>
             <a href="pdfs/videopdf2.pdf" target="_blank" class="text-accent border-underline">
               📄 Video PDF
             </a><br>
@@ -411,14 +446,12 @@
           <p>M.7.3.2.3</p>
           <h3>Dikdörtgen, paralelkenar, yamuk ve eşkenar dörtgeni tanır; açı özelliklerini belirler.</h3>
           <div class="links">
-            <a href="https://youtu.be/SwfUFh8QtOQ?si=YnAIE6GcQaTgREUO" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('SwfUFh8QtOQ')">
               📺 Video1
-            </a><br>
-            <a href="https://youtu.be/1AefLXcK-8U?si=LWxeRUpFBFlPQidU" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            </button><br>
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('1AefLXcK-8U')">
               📺 Video2
-            </a><br>
+            </button><br>
             <a href="pdfs/videopdf3.pdf" target="_blank" class="text-accent border-underline">
               📄 Video1 PDF
             </a><br>
@@ -439,10 +472,9 @@
           <p>M.7.3.2.4</p>
           <h3>Eşkenar dörtgen ve yamuğun alan bağıntılarını oluşturur, ilgili problemleri çözer.</h3>
           <div class="links">
-            <a href="https://youtu.be/hLeGZNvMKN4?si=EBJ-PQuZuHkogOmX" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('hLeGZNvMKN4')">
               📺 Video
-            </a><br>
+            </button><br>
             <a href="pdfs/videopdf4.pdf" target="_blank" class="text-accent border-underline">
               📄 Video PDF
             </a><br>
@@ -458,10 +490,9 @@
           <p>M.7.3.2.5</p>
           <h3>Alan ile ilgili problemleri çözer.</h3>
           <div class="links">
-            <a href="https://youtu.be/Ww-3UHnaXM4?si=MmWE9zlTIzCPo5dK" target="_blank" rel="noopener noreferrer"
-              class="text-accent border-underline">
+            <button class="text-accent border-underline focus:outline-none" onclick="openVideo('Ww-3UHnaXM4')">
               📺 Video
-            </a><br>
+            </button><br>
             <a href="pdfs/videopdf5.pdf" target="_blank" class="text-accent border-underline">
               📄 Video PDF
             </a><br>
@@ -484,6 +515,31 @@
       cikmisArrow.classList.toggle('rotate-180');
     });
   </script>
+  <script>
+    function openVideo(videoId) {
+      const modal = document.getElementById('video-modal');
+      const card = document.getElementById('video-card');
+      const iframe = document.getElementById('video-iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      modal.classList.remove('hidden');
+      // animasyonu tetikle
+      setTimeout(() => {
+        card.classList.remove('scale-95', 'opacity-0');
+      }, 10);
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('video-modal');
+      const card = document.getElementById('video-card');
+      const iframe = document.getElementById('video-iframe');
+      card.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        iframe.src = '';
+      }, 200);
+    }
+  </script>
+
 </body>
 
 </html>

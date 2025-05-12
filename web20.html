@@ -29,6 +29,7 @@
         .step5 {
             background: #F3E5F5;
         }
+
         /* Başlık vurgu rengi */
         h2.text-accent {
             color: #4E856F;
@@ -328,22 +329,24 @@
     <div class="absolute inset-0 bg-center bg-cover opacity-20 -z-10"
         style="background-image: url('https://img.freepik.com/premium-photo/abstract-wave-banner-wallpapers_337384-510.jpg?w=1380');">
     </div>
-
-    <!-- Menü -->
-    <nav class="w-full mt-2">
+    <nav class="w-full mt-2 z-50">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
-            <a href="index.html"><img src="https://i.imgur.com/7MmaIYP.png" alt="Girl Math Logo"
-                    class="w-40 h-auto"></a>
+            <a href="index.html">
+                <img src="https://i.imgur.com/7MmaIYP.png" alt="Girl Math Logo"
+                    class="absolute top-6 left-6 w-20 sm:w-32 md:w-40 h-auto">
+            </a>
 
             <!-- Dropdown Menü -->
-            <div class="relative group inline-block -mt-16">
+            <div class="relative group inline-block mt-8 z-50">
                 <button
-                    class="font-semibold text-white text-lg px-4 py-2 bg-black bg-opacity-30 rounded-lg backdrop-blur-sm transition-colors hover:bg-opacity-50">Menü
-                    ▼</button>
+                    class="font-semibold text-white text-lg px-4 py-2 bg-black bg-opacity-30 rounded-lg backdrop-blur-sm transition-colors hover:bg-opacity-50">
+                    Menü ▼
+                </button>
                 <ul
-                    class="absolute right-0 mt-2 w-52 bg-white bg-opacity-60 backdrop-blur-sm ring-1 ring-gray-200 rounded-2xl shadow-2xl transform opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    class="absolute right-0 mt-2 w-52 bg-white bg-opacity-95 backdrop-blur-sm ring-1 ring-gray-200 rounded-2xl shadow-2xl transform opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
                     <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <!-- Home Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path
@@ -352,6 +355,7 @@
                         <a href="index.html" class="font-medium text-accent">Anasayfa</a>
                     </li>
                     <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <!-- Book Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -360,15 +364,17 @@
                         <a href="kazanimlar.html" class="font-medium text-accent">Kazanımlar</a>
                     </li>
                     <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <!-- Support Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
-                        <a href="web02.html" class="font-medium text-accent">Web 2.0 Desteği</a>
+                        <a href="web20.html" class="font-medium text-accent">Web 2.0 Desteği</a>
                     </li>
                     <li class="relative">
                         <button id="cikmisToggle"
                             class="w-full text-left flex items-center px-5 py-3 font-medium text-accent hover:bg-primary rounded-lg transition-colors focus:outline-none">
+                            <!-- Document Icon -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="currentColor"
                                 viewBox="0 0 20 20">
                                 <path
@@ -376,6 +382,8 @@
                                 <path d="M12 9H8v2h4V9zm0 4H8v2h4v-2z" />
                             </svg>
                             Çıkmış Sorular
+
+                            <!-- Chevron Icon: dönüşüm için transform ve transition -->
                             <svg id="cikmisArrow" xmlns="http://www.w3.org/2000/svg"
                                 class="w-4 h-4 ml-auto text-accent transform transition-transform duration-200"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -383,24 +391,31 @@
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
+
+                        <!-- Gizli alt menü -->
                         <ul id="cikmisMenu"
-                            class="absolute left-0 top-full mt-1 w-full bg-white bg-opacity-60 backdrop-blur-sm rounded-lg shadow-lg hidden">
-                            <li><a href="pdfs/cikmis1.pdf" target="_blank"
-                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">Çıkmış
-                                    Sorular Test</a></li>
-                            <li><a href="pdfs/cikmis2.pdf" target="_blank"
-                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">Çıkmış
-                                    Sorular Test (Çözüm)</a></li>
+                            class="absolute left-0 top-full mt-1 w-full bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-lg hidden">
+                            <li>
+                                <a href="pdfs/cikmis1.pdf" target="_blank"
+                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">
+                                    Çıkmış Sorular Test
+                                </a>
+                            </li>
+                            <li>
+                                <a href="pdfs/cikmis2.pdf" target="_blank"
+                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">
+                                    Çıkmış Sorular Test (Çözüm)
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-        </div>
     </nav>
 
     <main class="max-w-6xl mx-auto pt-24 pb-12 px-6">
         <!-- GeoGebra Bölümü -->
-        <h2 class="text-4xl font-bold text-accent text-center mb-8 -mt-8">
+        <h2 class="text-4xl font-bold text-accent text-center">
             GeoGebra Çalışmaları
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 place-items-center">
@@ -501,7 +516,6 @@
 
 
     </main>
-    <!-- body sonunda ekle -->
     <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
     <script>
         VanillaTilt.init(document.querySelectorAll(".game-card"), {
@@ -519,6 +533,9 @@
         toggleBtn.addEventListener('click', () => {
             cikmisMenu.classList.toggle('hidden');
             cikmisArrow.classList.toggle('rotate-180');
+        });
+        document.addEventListener('click', () => {
+            mainMenu.classList.add('hidden');
         });
     </script>
 </body>

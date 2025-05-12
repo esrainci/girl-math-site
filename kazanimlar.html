@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kazanımlar | Girl Math</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .step1 {
+      background: #E3F2FD;
+    }
+
+    .step2 {
+      background: #FFEBEE;
+    }
+
+    .step3 {
+      background: #E8F5E9;
+    }
+
+    .step4 {
+      background: #FFF3E0;
+    }
+
+    .step5 {
+      background: #F3E5F5;
+    }
+
+    h2.text-accent {
+      color: #4E856F;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .hexagon {
+      height: 350px;
+      min-height: 350px;
+      position: relative;
+      aspect-ratio: 1.4 / 1;
+      width: 350px;
+      min-width: 350px;
+      padding: 2rem;
+      box-sizing: border-box;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: box-shadow 0.3s;
+    }
+
+    .hexagon:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .hexagon .content {
+      width: 100%;
+    }
+
+    .hexagon h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hexagon p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .hexagon .links a {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1.5rem;
+    }
+
+    nav.absolute {
+      position: absolute;
+      top: 2rem;
+      /* Tailwind top-8 */
+      right: 2rem;
+      /* Tailwind right-8 */
+      z-index: 10;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-wrapper button {
+      font-weight: 600;
+      color: #fff;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      transition: background-color .3s;
+    }
+
+    .dropdown-wrapper button:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      /* Tailwind mt-2 */
+      right: 0;
+      width: 13rem;
+      /* Tailwind w-52 */
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .dropdown-wrapper:hover .dropdown-menu {
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li {
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown-menu li+li {
+      margin-top: 0.5rem;
+      /* Tailwind space-y-2 */
+    }
+
+    .dropdown-menu svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0.5rem;
+      color: #4E856F;
+      /* text-accent */
+    }
+
+    .dropdown-menu a {
+      font-size: 1rem;
+      color: #333;
+      text-decoration: none;
+      flex: 1;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #BEE3DB;
+      /* bg-primary */
+      border-radius: 0.5rem;
+    }
+
+    h2 {
+      margin-top: 1rem;
+    }
+
+    .border-underline {
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .border-underline:hover {
+      border-bottom-color: #4E856F;
+    }
+  </style>
+</head>
+
+<body class="relative bg-secondary text-gray-800">
+  <!-- Soluk arka plan -->
+  <div class="absolute inset-0 bg-center bg-cover opacity-20 -z-10"
+    style="background-image: url('https://img.freepik.com/premium-photo/abstract-wave-banner-wallpapers_337384-510.jpg?w=1380');">
+  </div>
+  <nav class="w-full mt-2">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html">
+        <img src="https://i.imgur.com/7MmaIYP.png" alt="Girl Math Logo" class="w-40 h-auto">
+      </a>
+
+      <!-- Dropdown Menü -->
+      <div class="relative group inline-block -mt-16">
+        <button
+          class="font-semibold text-white text-lg px-4 py-2 bg-black bg-opacity-30 rounded-lg backdrop-blur-sm transition-colors hover:bg-opacity-50">
+          Menü ▼
+        </button>
+        <ul
+          class="absolute right-0 mt-2 w-52 bg-white bg-opacity-60 backdrop-blur-sm ring-1 ring-gray-200 rounded-2xl shadow-2xl transform opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+          <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+            <!-- Home Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path
+                d="M10.707 1.707a1 1 0 00-1.414 0L2 9.586V17a1 1 0 001 1h5a1 1 0 001-1v-4h2v4a1 1 0 001 1h5a1 1 0 001-1V9.586l-7.293-7.293z" />
+            </svg>
+            <a href="index.html" class="font-medium text-accent">Anasayfa</a>
+          </li>
+          <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+            <!-- Book Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v12a2 2 0 01-2 2z" />
+            </svg>
+            <a href="kazanimlar.html" class="font-medium text-accent">Kazanımlar</a>
+          </li>
+          <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+            <!-- Support Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <a href="web20.html" class="font-medium text-accent">Web 2.0 Desteği</a>
+          </li>
+          <li class="relative">
+            <button id="cikmisToggle"
+              class="w-full text-left flex items-center px-5 py-3 font-medium text-accent hover:bg-primary rounded-lg transition-colors focus:outline-none">
+              <!-- Document Icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                  d="M8 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0016.586 6L12 1.414A2 2 0 0010.586 1H8z" />
+                <path d="M12 9H8v2h4V9zm0 4H8v2h4v-2z" />
+              </svg>
+              Çıkmış Sorular
+
+              <!-- Chevron Icon: dönüşüm için transform ve transition -->
+              <svg id="cikmisArrow" xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 ml-auto text-accent transform transition-transform duration-200" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Gizli alt menü -->
+            <ul id="cikmisMenu"
+              class="absolute left-0 top-full mt-1 w-full bg-white bg-opacity-60 backdrop-blur-sm rounded-lg shadow-lg hidden">
+              <li>
+                <a href="pdfs/cikmis1.pdf" target="_blank"
+                  class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">
+                  Çıkmış Sorular Test
+                </a>
+              </li>
+              <li>
+                <a href="pdfs/cikmis2.pdf" target="_blank"
+                  class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">
+                  Çıkmış Sorular Test (Çözüm)
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto py-12 px-6">
+    <!-- Kavrama Testleri Modal -->
+    <div id="kavrama-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div
+        class="bg-white rounded-2xl p-8 shadow-2xl w-11/12 max-w-md relative transform scale-95 opacity-0 transition-all duration-200 ease-out"
+        id="kavrama-card">
+        <button class="absolute top-4 right-4 text-gray-600 text-2xl hover:text-gray-800"
+          onclick="closeKavrama()">&times;</button>
+        <h3 class="text-2xl font-semibold mb-6 text-accent">Kavrama Testleri</h3>
+        <ul class="space-y-3">
+          <li><a href="pdfs/test1.pdf" target="_blank" class="block text-accent hover:underline">Test 1 </a></li>
+          <li><a href="pdfs/test1c.pdf" target="_blank" class="block text-accent hover:underline">Test 1 Çözüm </a></li>
+          <li><a href="pdfs/test2.pdf" target="_blank" class="block text-accent hover:underline">Test 2</a></li>
+          <li><a href="pdfs/test2c.pdf" target="_blank" class="block text-accent hover:underline">Test 2 Çözüm</a></li>
+          <li><a href="pdfs/test3.pdf" target="_blank" class="block text-accent hover:underline">Test 3 </a></li>
+          <li><a href="pdfs/test3c.pdf" target="_blank" class="block text-accent hover:underline">Test 3 Çözüm</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const kavramaTests = {
+        '1': [
+          { label: 'Çokgende Açılar-Test 1', url: 'pdfs/test1.pdf' },
+          { label: 'Çokgende Açılar-Test 1 (Çözüm)', url: 'pdfs/test1c.pdf' },
+          { label: 'Çokgende Açılar-Test 2', url: 'pdfs/test2.pdf' },
+          { label: 'Çokgende Açılar-Test 2 (Çözüm)', url: 'pdfs/test2c.pdf' },
+          { label: 'Çokgende Açılar-Test 3', url: 'pdfs/test3.pdf' },
+          { label: 'Çokgende Açılar-Test 3 (Çözüm)', url: 'pdfs/test3c.pdf' }
+        ],
+        '2': [
+          { label: 'Çokgenler-Test 1', url: 'pdfs/ttest1.pdf' },
+          { label: 'Çokgenler-Test 1 (Çözüm)', url: 'pdfs/ttest1c.pdf' }
+        ],
+        '3': [
+          { label: 'Dörtgenler ve Özellikleri-Test 1', url: 'pdfs/tttest1.pdf' },
+          { label: 'Dörtgenler ve Özellikleri-Test 1 (Çözüm)', url: 'pdfs/tttest1c.pdf' },
+          { label: 'Dörtgenler ve Özellikleri-Test 2', url: 'pdfs/tttest2.pdf' },
+          { label: 'Dörtgenler ve Özellikleri-Test 2 (Çözüm)', url: 'pdfs/tttest2c.pdf' }
+        ],
+        '4': [
+          { label: 'Eşkenar Dörtgenin Alanı-Test 1', url: 'pdfs/eskenar1.pdf' },
+          { label: 'Eşkenar Dörtgenin Alanı-Test 1 (Çözüm)', url: 'pdfs/eskenar1c.pdf' },
+          { label: 'Eşkenar Dörtgenin Alanı-Test 2', url: 'pdfs/eskenar2.pdf' },
+          { label: 'Eşkenar Dörtgenin Alanı-Test 2 (Çözüm)', url: 'pdfs/eskenar2c.pdf' },
+          { label: 'Yamuğun Alanı-Test 1', url: 'pdfs/yamuk1.pdf' },
+          { label: 'Yamuğun Alanı-Test 1 (Çözüm)', url: 'pdfs/yamuk1c.pdf' },
+          { label: 'Yamuğun Alanı-Test 2', url: 'pdfs/yamuk2.pdf' },
+          { label: 'Yamuğun Alanı-Test 2 (Çözüm)', url: 'pdfs/yamuk2c.pdf' },
+        ],
+        '5': [
+          { label: 'Alan Problemleri-Test 1', url: 'pdfs/alan1.pdf' },
+          { label: 'Alan Problemleri-Test 1 (Çözüm)', url: 'pdfs/alan1c.pdf' },
+          { label: 'Alan Problemleri-Test 2', url: 'pdfs/alan2.pdf' },
+          { label: 'Alan Problemleri-Test 2 (Çözüm)', url: 'pdfs/alan2c.pdf' },
+          { label: 'Genel Alan Problemleri-Test 1', url: 'pdfs/alangenel.pdf' },
+          { label: 'Genel Alan Problemleri-Test 1 (Çözüm)', url: 'pdfs/alangenelc.pdf' }
+        ]
+      };
+
+      function openKavrama(id) {
+        // Modal’ı göster
+        const modal = document.getElementById('kavrama-modal');
+        modal.classList.remove('hidden');
+        // Animasyonu tetikle
+        const card = document.getElementById('kavrama-card');
+        setTimeout(() => {
+          card.classList.remove('scale-95', 'opacity-0');
+        }, 10);
+
+        // Listeyi doldur
+        const list = card.querySelector('ul');
+        list.innerHTML = '';
+        kavramaTests[id].forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${item.url}" target="_blank" class="block text-accent hover:underline">${item.label}</a>`;
+          list.appendChild(li);
+        });
+      }
+
+      function closeKavrama() {
+        const modal = document.getElementById('kavrama-modal');
+        const card = document.getElementById('kavrama-card');
+        card.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+      }
+
+    </script>
+
+    <h2 class="text-4xl font-bold text-accent text-center">KAZANIMLAR</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 mt-8 justify-items-center">
+      <div class="hexagon step1">
+        <div class="content">
+          <span class="text-accent text-3xl font-bold">1</span>
+          <p>M.7.3.2.1</p>
+          <h3>Düzgün çokgenlerin kenar ve açı özelliklerini açıklar.</h3>
+          <div class="links">
+            <a href="https://youtu.be/TdTLMOh-bzc?si=hXO9jFpVz5LXA989" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video
+            </a><br>
+            <a href="pdfs/videopdf1.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video PDF
+            </a><br>
+            <a href="pdfs/minitest1.pdf" target="_blank" class="text-accent border-underline">📝 Mini Test</a><br>
+            <button class="text-accent hover:underline" data-test="1" onclick="openKavrama(this.dataset.test)">
+              ✔️ Kavrama Testleri
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hexagon step2">
+        <div class="content">
+          <span class="text-accent text-3xl font-bold">2</span>
+          <p>M.7.3.2.2</p>
+          <h3>Çokgenlerin köşegenlerini, iç ve dış açılarını belirler; iç ve dış açıların toplam ölçüsünü hesaplar.</h3>
+          <div class="links">
+            <a href="https://youtu.be/77JEUiqguA4?si=_sCer3zCSDILHRj9" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video
+            </a><br>
+            <a href="pdfs/videopdf2.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video PDF
+            </a><br>
+            <a href="pdfs/minitest2.pdf" target="_blank" class="text-accent border-underline">📝 Mini Test</a><br>
+            <button class="text-accent hover:underline" data-test="2" onclick="openKavrama(this.dataset.test)">
+              ✔️ Kavrama Testleri
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hexagon step3">
+        <div class="content">
+          <span class="text-accent text-3xl font-bold">3</span>
+          <p>M.7.3.2.3</p>
+          <h3>Dikdörtgen, paralelkenar, yamuk ve eşkenar dörtgeni tanır; açı özelliklerini belirler.</h3>
+          <div class="links">
+            <a href="https://youtu.be/SwfUFh8QtOQ?si=YnAIE6GcQaTgREUO" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video1
+            </a><br>
+            <a href="https://youtu.be/1AefLXcK-8U?si=LWxeRUpFBFlPQidU" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video2
+            </a><br>
+            <a href="pdfs/videopdf3.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video1 PDF
+            </a><br>
+            <a href="pdfs/videopdf3b.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video2 PDF
+            </a><br>
+            <button class="text-accent hover:underline" data-test="3" onclick="openKavrama(this.dataset.test)">
+              ✔️ Kavrama Testleri
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center gap-8 mt-8">
+      <div class="hexagon step4">
+        <div class="content">
+          <span class="text-accent text-3xl font-bold">4</span>
+          <p>M.7.3.2.4</p>
+          <h3>Eşkenar dörtgen ve yamuğun alan bağıntılarını oluşturur, ilgili problemleri çözer.</h3>
+          <div class="links">
+            <a href="https://youtu.be/hLeGZNvMKN4?si=EBJ-PQuZuHkogOmX" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video
+            </a><br>
+            <a href="pdfs/videopdf4.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video PDF
+            </a><br>
+            <button class="text-accent hover:underline" data-test="4" onclick="openKavrama(this.dataset.test)">
+              ✔️ Kavrama Testleri
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hexagon step5">
+        <div class="content">
+          <span class="text-accent text-3xl font-bold">5</span>
+          <p>M.7.3.2.5</p>
+          <h3>Alan ile ilgili problemleri çözer.</h3>
+          <div class="links">
+            <a href="https://youtu.be/Ww-3UHnaXM4?si=MmWE9zlTIzCPo5dK" target="_blank" rel="noopener noreferrer"
+              class="text-accent border-underline">
+              📺 Video
+            </a><br>
+            <a href="pdfs/videopdf5.pdf" target="_blank" class="text-accent border-underline">
+              📄 Video PDF
+            </a><br>
+            <a href="pdfs/minitest5.pdf" target="_blank" class="text-accent border-underline">📝 Mini Test</a><br>
+            <button class="text-accent hover:underline" data-test="5" onclick="openKavrama(this.dataset.test)">
+              ✔️ Kavrama Testleri
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const toggleBtn = document.getElementById('cikmisToggle');
+    const cikmisMenu = document.getElementById('cikmisMenu');
+    const cikmisArrow = document.getElementById('cikmisArrow');
+
+    toggleBtn.addEventListener('click', () => {
+      cikmisMenu.classList.toggle('hidden');
+      cikmisArrow.classList.toggle('rotate-180');
+    });
+  </script>
+</body>
+
+</html>

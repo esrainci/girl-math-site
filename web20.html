@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web 2.0 | Girl Math</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Renk adımları */
+        .step1 {
+            background: #E3F2FD;
+        }
+
+        .step2 {
+            background: #FFEBEE;
+        }
+
+        .step3 {
+            background: #E8F5E9;
+        }
+
+        .step4 {
+            background: #FFF3E0;
+        }
+
+        .step5 {
+            background: #F3E5F5;
+        }
+        /* Başlık vurgu rengi */
+        h2.text-accent {
+            color: #4E856F;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Altıgen kart stili */
+        .hexagon {
+            height: 300px;
+            min-height: 300px;
+            aspect-ratio: 1.4 / 1;
+            width: 300px;
+            min-width: 300px;
+            padding: 1rem;
+            box-sizing: border-box;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .hexagon:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hexagon .content {
+            width: 100%;
+        }
+
+        .hexagon h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hexagon .links a,
+        .hexagon .links button {
+            display: block;
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+            color: #4E856F;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Menü ve logo sabit */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem;
+        }
+
+        nav.absolute {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10;
+        }
+
+        /* Dropdown */
+        .dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-wrapper button {
+            font-weight: 600;
+            color: #fff;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            backdrop-filter: blur(4px);
+            transition: background-color .3s;
+        }
+
+        .dropdown-wrapper button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 13rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform .2s, opacity .2s;
+        }
+
+        .dropdown-wrapper:hover .dropdown-menu {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .dropdown-menu li {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-menu li+li {
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-menu svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            color: #4E856F;
+        }
+
+        .dropdown-menu a {
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #BEE3DB;
+            border-radius: 0.5rem;
+        }
+
+        h2 {
+            margin-top: 1rem;
+        }
+
+        .border-underline {
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .border-underline:hover {
+            border-bottom-color: #4E856F;
+        }
+
+        /* --------------------------------------------- */
+        /* GLOBAL: Tüm .game-card elemanları kare olsun */
+        /* --------------------------------------------- */
+        .game-card {
+            /* Kare oranı */
+            width: 100%;
+            max-width: 12rem;
+            /* İstersen 12rem yerine w-48 karşılığı px de kullanabilirsin */
+            aspect-ratio: 1 / 1;
+            /* boy = en */
+            margin-left: auto;
+            margin-right: auto;
+            /* Flex ortalama & Padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+
+            /* Köşe ve taşma */
+            border-radius: 0.5rem;
+            overflow: hidden;
+
+            /* Cam efekti */
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(8px);
+
+            /* Neon‐pastel gradient border (az önce beğendiğin) */
+            position: relative;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            /* border kalınlığı kadar dışarı taşsın */
+            border-radius: inherit;
+            background: linear-gradient(45deg,
+                    #E3F2FD, #FFEBEE, #E8F5E9, #FFF3E0, #F3E5F5);
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        /* Hover Efekti */
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(243, 229, 245, 0.6);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        /* --------------------------------------------- */
+        /* GeoGebra için Altıgen Kart Stili (.gg-hex)    */
+        /* --------------------------------------------- */
+        .gg-hex {
+            /* Boyut ve oran */
+            width: 100%;
+            max-width: 20rem;
+            aspect-ratio: 1 / 1;
+            /* istersen w-56 yerine px de yazabilirsin */
+            aspect-ratio: 1 / 1;
+            /* kareden altıgene geçişte yükseklik = genişlik */
+
+            /* Altıgen şekli */
+            clip-path: polygon(25% 0%,
+                    75% 0%,
+                    100% 50%,
+                    75% 100%,
+                    25% 100%,
+                    0% 50%);
+
+            /* İç düzen & hizalama */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            text-align: center;
+
+            /* Cam efekti */
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+
+            /* Geçişler */
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        /* Pastel-neon gradient border */
+        .gg-hex::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            /* border kalınlığı kadar dışarı taş */
+            border-radius: inherit;
+            background: linear-gradient(45deg,
+                    #E3F2FD,
+                    /* pastel mavi */
+                    #FFEBEE,
+                    /* pastel pembe */
+                    #E8F5E9,
+                    /* pastel yeşil */
+                    #FFF3E0,
+                    /* pastel turuncu */
+                    #F3E5F5
+                    /* pastel mor */
+                );
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        /* Hover Efekti */
+        .gg-hex:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(243, 229, 245, 0.6);
+        }
+
+        /* İç Başlık & Link Stilleri */
+        .gg-hex h3 {
+            font-size: 1.25rem;
+            margin-bottom: .75rem;
+            color: #000;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .gg-hex .links a {
+            display: block;
+            margin: .25rem 0;
+            color: #000000;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color .2s;
+        }
+
+        .gg-hex .links a:hover {
+            color: #4E856F;
+        }
+    </style>
+</head>
+
+<body class="relative bg-secondary text-gray-800">
+    <!-- Soluk arka plan -->
+    <div class="absolute inset-0 bg-center bg-cover opacity-20 -z-10"
+        style="background-image: url('https://img.freepik.com/premium-photo/abstract-wave-banner-wallpapers_337384-510.jpg?w=1380');">
+    </div>
+
+    <!-- Menü -->
+    <nav class="w-full mt-2">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html"><img src="https://i.imgur.com/7MmaIYP.png" alt="Girl Math Logo"
+                    class="w-40 h-auto"></a>
+
+            <!-- Dropdown Menü -->
+            <div class="relative group inline-block -mt-16">
+                <button
+                    class="font-semibold text-white text-lg px-4 py-2 bg-black bg-opacity-30 rounded-lg backdrop-blur-sm transition-colors hover:bg-opacity-50">Menü
+                    ▼</button>
+                <ul
+                    class="absolute right-0 mt-2 w-52 bg-white bg-opacity-60 backdrop-blur-sm ring-1 ring-gray-200 rounded-2xl shadow-2xl transform opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M10.707 1.707a1 1 0 00-1.414 0L2 9.586V17a1 1 0 001 1h5a1 1 0 001-1v-4h2v4a1 1 0 001 1h5a1 1 0 001-1V9.586l-7.293-7.293z" />
+                        </svg>
+                        <a href="index.html" class="font-medium text-accent">Anasayfa</a>
+                    </li>
+                    <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v12a2 2 0 01-2 2z" />
+                        </svg>
+                        <a href="kazanimlar.html" class="font-medium text-accent">Kazanımlar</a>
+                    </li>
+                    <li class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <a href="web02.html" class="font-medium text-accent">Web 2.0 Desteği</a>
+                    </li>
+                    <li class="relative">
+                        <button id="cikmisToggle"
+                            class="w-full text-left flex items-center px-5 py-3 font-medium text-accent hover:bg-primary rounded-lg transition-colors focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path
+                                    d="M8 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0016.586 6L12 1.414A2 2 0 0010.586 1H8z" />
+                                <path d="M12 9H8v2h4V9zm0 4H8v2h4v-2z" />
+                            </svg>
+                            Çıkmış Sorular
+                            <svg id="cikmisArrow" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 ml-auto text-accent transform transition-transform duration-200"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <ul id="cikmisMenu"
+                            class="absolute left-0 top-full mt-1 w-full bg-white bg-opacity-60 backdrop-blur-sm rounded-lg shadow-lg hidden">
+                            <li><a href="pdfs/cikmis1.pdf" target="_blank"
+                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">Çıkmış
+                                    Sorular Test</a></li>
+                            <li><a href="pdfs/cikmis2.pdf" target="_blank"
+                                    class="block px-5 py-3 hover:bg-primary rounded-lg font-medium text-accent">Çıkmış
+                                    Sorular Test (Çözüm)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto pt-24 pb-12 px-6">
+        <!-- GeoGebra Bölümü -->
+        <h2 class="text-4xl font-bold text-accent text-center mb-8 -mt-8">
+            GeoGebra Çalışmaları
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 place-items-center">
+
+            <!-- M.7.3.2.1 -->
+            <div class="gg-hex step1">
+                <h3>M.7.3.2.1</h3>
+                <div class="links">
+                    <a href="https://www.geogebra.org/m/vkmwdwc3" target="_blank">Düzgün Çokgenler</a>
+                    <a href="https://www.geogebra.org/m/phxtktf6" target="_blank">Düzgün Çokgenlerin Açı Özellikleri</a>
+                    <a href="https://www.geogebra.org/m/zJFdxtYb" target="_blank">Düzgün Çokgenlerle Keşif Yolculuğu</a>
+                </div>
+            </div>
+
+            <!-- M.7.3.2.2 -->
+            <div class="gg-hex step2">
+                <h3>M.7.3.2.2</h3>
+                <div class="links">
+                    <a href="https://www.geogebra.org/m/hdbttqnv" target="_blank">Çokgen Dünyasını Keşfet</a>
+                    <a href="https://www.geogebra.org/m/kVG2zXmv" target="_blank">Düzgün Çokgenin Elemanları</a>
+                </div>
+            </div>
+
+            <!-- M.7.3.2.3 -->
+            <div class="gg-hex step3">
+                <h3>M.7.3.2.3</h3>
+                <div class="links">
+                    <a href="https://www.geogebra.org/m/punwc5d3" target="_blank">Dörtgenler: Açı ve Kenar
+                        İlişkileri</a>
+                    <a href="https://www.geogebra.org/m/aretn39s" target="_blank">Dörtgenler</a>
+                </div>
+            </div>
+
+            <!-- M.7.3.2.4 -->
+            <div class="gg-hex step4">
+                <h3>M.7.3.2.4</h3>
+                <div class="links">
+                    <a href="https://www.geogebra.org/m/h7xhbzh3" target="_blank">Yamuğun Alanı</a>
+                    <a href="https://www.geogebra.org/m/x5pnjcyf" target="_blank">Eşkenar Dörtgenin Alanı</a>
+                    <a href="https://www.geogebra.org/m/e9e746hz" target="_blank">Yamuğun Alanını Keşfet</a>
+                    <a href="https://www.geogebra.org/m/sfrzmvvm" target="_blank">Eşkenar Dörtgenin ve<br> Yamuğun
+                        Alanı</a>
+                </div>
+            </div>
+
+            <!-- M.7.3.2.5 -->
+            <div class="gg-hex step5">
+                <h3>M.7.3.2.5</h3>
+                <div class="links">
+                    <a href="https://www.geogebra.org/m/jtpjseag" target="_blank">Alan Problemleri Atölyesi</a>
+                    <a href="https://www.geogebra.org/m/aretn39s" target="_blank">Dörtgenler ve Alan Problemleri</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <section id="games" class="py-12">
+            <h2 class="text-4xl font-bold text-center text-accent mb-8">Oyunlar</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
+
+                <!-- Kart 1: Kutuyu Aç! -->
+                <a href="https://wordwall.net/tr/resource/9313162/7s%C4%B1n%C4%B1f-%C3%A7okgenler" class="game-card"
+                    data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Kutuyu Aç!</h4>
+                </a>
+
+                <!-- Kart 2: Test -->
+                <a href="https://wordwall.net/tr/resource/15121343/%C3%A7okgenler-7s%C4%B1n%C4%B1f" class="game-card"
+                    data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Test</h4>
+                </a>
+
+                <!-- Kart 3: Rastgele Kartlar -->
+                <a href="https://wordwall.net/tr/resource/31873041/matematik/%C3%A7okgenler" class="game-card"
+                    data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Rastgele Kartlar</h4>
+                </a>
+
+                <!-- Kart 4: Çarkıfelek -->
+                <a href="https://wordwall.net/tr/resource/13356343/%C3%A7okgenler" class="game-card" data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Çarkıfelek</h4>
+                </a>
+
+                <!-- Kart 5: Gameshow Testi -->
+                <a href="https://wordwall.net/tr/resource/13445169/%C3%A7okgenler" class="game-card" data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Gameshow Testi</h4>
+                </a>
+
+                <!-- Kart 6: Bulmaca -->
+                <a href="https://wordwall.net/tr/resource/15037028/7-s%C4%B1n%C4%B1f-%C3%A7okgenler" class="game-card"
+                    data-tilt>
+                    <h4 class="text-xl font-semibold text-accent text-center">Bulmaca</h4>
+                </a>
+
+            </div>
+        </section>
+
+
+    </main>
+    <!-- body sonunda ekle -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".game-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.3,
+        });
+    </script>
+
+    <script>
+        const toggleBtn = document.getElementById('cikmisToggle');
+        const cikmisMenu = document.getElementById('cikmisMenu');
+        const cikmisArrow = document.getElementById('cikmisArrow');
+        toggleBtn.addEventListener('click', () => {
+            cikmisMenu.classList.toggle('hidden');
+            cikmisArrow.classList.toggle('rotate-180');
+        });
+    </script>
+</body>
+
+</html>

@@ -119,25 +119,65 @@
       background-position: center;
       padding: 60px 1rem;
     }
-    .expert-overlay { position: absolute; inset: 0; background: rgba(30,30,30,0.7); }
-    .expert-content { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; color: #fff; }
-    .expert-content h2 { font-size: 3rem; font-weight: 700; margin: -1rem 0 2rem; letter-spacing: 1px; }
-    .expert-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    .expert-card {
-      width: 100%; margin: 0 auto;
-      background-color: rgba(255,255,255,0.9); color: #1a202c;
-      padding: 1.5rem; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(20px);
+
+    .expert-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 30, 30, 0.7);
     }
+
+    .expert-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1000px;
+      margin: 0 auto;
+      color: #fff;
+    }
+
+    .expert-content h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: -1rem 0 2rem;
+      letter-spacing: 1px;
+    }
+
+    .expert-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .expert-card {
+      width: 100%;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #1a202c;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
     .expert-card .name {
-      font-size: 1.5rem; font-weight: 700; color: #4E856F;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #4E856F;
       margin-bottom: 0.25rem;
     }
+
     .expert-card .specialty {
-      font-size: 1.125rem; font-style: italic; color: #333;
+      font-size: 1.125rem;
+      font-style: italic;
+      color: #333;
       margin-bottom: 1rem;
     }
-    .expert-card p { font-size: 1rem; line-height: 1.5; }
+
+    .expert-card p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
     /* Testimonials */
     .testimonial {
       opacity: 0;
@@ -172,9 +212,8 @@
 <body>
   <!-- Hero -->
   <section class="hero-section text-center">
-    <img src="https://i.imgur.com/0RR9ZPu.jpeg" 
-     alt="Girl Math Logo" 
-     class="absolute top-6 left-6 sm:w-40 w-full max-w-full h-auto">
+    <img src="https://i.imgur.com/0RR9ZPu.jpeg" alt="Girl Math Logo"
+      class="absolute top-6 left-6 sm:w-40 w-full max-w-full h-auto">
     <nav class="absolute top-8 right-8">
       <div class="relative group inline-block">
         <!-- Menü Butonu -->
@@ -208,7 +247,7 @@
               Kazanımlar
             </a>
           </li>
-          
+
           <li>
             <a href="web20.html" class="flex items-center px-5 py-3 hover:bg-primary rounded-lg transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-accent" fill="none" viewBox="0 0 24 24"
@@ -236,15 +275,17 @@
       </div>
     </nav>
     <div class="container mx-auto px-6">
-      <div class="hero-text-wrapper inline-block text-center">
+      <div class="hero-text-wrapper inline-flex flex-col items-center text-center">
         <h1>Matematiğe Hoş Geldiniz!</h1>
         <p class="mt-2">
           Matematiği daha eğlenceli ve anlaşılır hale getirmek için buradayız!
         </p>
-        <a href="#hakkimizda" class="hero-button inline-block mt-4">
+        <a href="#hakkimizda" class="hero-button mt-4">
           Keşfet
         </a>
       </div>
+
+    </div>
     </div>
   </section>
   <!-- About -->
@@ -282,7 +323,8 @@
         <div class="expert-card">
           <div class="name">Elanur Oral</div>
           <div class="specialty">Veri ve İstatistik Eğitmeni</div>
-          <p>İstatistiksel verileri okuma, yorumlama ve grafiklerle anlatma konularında güçlü bir öğretim yaklaşımına sahiptir.</p>
+          <p>İstatistiksel verileri okuma, yorumlama ve grafiklerle anlatma konularında güçlü bir öğretim yaklaşımına
+            sahiptir.</p>
         </div>
         <div class="expert-card">
           <div class="name">Selenay Kutlu</div>
@@ -292,7 +334,8 @@
         <div class="expert-card">
           <div class="name">İclal Başer</div>
           <div class="specialty">Cebirsel Düşünme ve Sayılar Teorisi Uzmanı</div>
-          <p>Sayı örüntüleri, cebirsel ifadeler ve eşitlikler konularında derin bilgi ve etkili anlatımıyla öne çıkar.</p>
+          <p>Sayı örüntüleri, cebirsel ifadeler ve eşitlikler konularında derin bilgi ve etkili anlatımıyla öne çıkar.
+          </p>
         </div>
       </div>
     </div>
